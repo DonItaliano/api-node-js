@@ -3,10 +3,10 @@ const router = express.Router();
 
 const CompartilhamentoController = require('../controllers/Compartilhamento'); 
 
-router.get('/usuarios', CompartilhamentoController.listarCompartilhamento); 
-router.post('/usuarios', Compartilhamento.cadastrarCompartilhamento); 
-router.patch('/usuarios', CompartilhamentoController.editarCompartilhamento); 
-router.delete('/usuarios', CompartilhamentoController.apagarCompartilhamento); 
+router.get('/compartilhamento', CompartilhamentoController.listarCompartilhamento); 
+router.post('/compartilhamento', CompartilhamentoController.cadastrarCompartilhamento); 
+router.patch('/compartilhamento', CompartilhamentoController.editarCompartilhamento); 
+router.delete('/compartilhamento', CompartilhamentoController.apagarCompartilhamento); 
 
 
 module.exports = router;
