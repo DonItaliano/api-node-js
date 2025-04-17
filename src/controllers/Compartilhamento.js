@@ -3,10 +3,19 @@ const db = require('../dataBase/connection');
 module.exports = {
     async listarCompartilhamento(request, response) {
         try {
+           
+            const sql = `
+            SELECT comp_id, not_id, comp_plataforma, comp_data FROM COMPARTILHAMENTO;
+            
+            `;
+           
+            const [rows] = await db.query(sql);
+
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de Compartilhamento', 
-                dados: null
+                dados: rows
             });
         } catch (error) {
             return response.status(500).json({
