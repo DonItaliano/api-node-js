@@ -17,6 +17,7 @@ module.exports = {
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Lista de Compartilhamento', 
+                nRegistros,
                 dados: rows
             });
         } catch (error) {
