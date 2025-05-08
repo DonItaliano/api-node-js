@@ -30,10 +30,32 @@ module.exports = {
     }, 
     async cadastrarCompartilhamento(request, response) {
         try {
+
+
+            const { not_id, comp_plataforma, comp_data } = request.body;
+
+
+            const sql = `
+
+            INSERT INTO COMPARTILHAMENTO (not_id, comp_plataforma, comp_data)
+            VALUES (?, ?, ?);
+            `;
+
+            const values = [not_id, comp_plataforma, comp_data];
+            
+            const [result] = await db.query(sql, values);
+
+            const dados = {
+                comp_id: result.insertId,
+                not_id,
+                comp_plataforma,
+                comp_data
+            };
+
             return response.status(200).json({
                 sucesso: true, 
                 mensagem: 'Criação de Compartilhamento', 
-                dados: null
+                dados: dados
             });
         } catch (error) {
             return response.status(500).json({
