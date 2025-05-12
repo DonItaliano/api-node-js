@@ -5,7 +5,7 @@ const CompartilhamentoController = require('../controllers/Compartilhamento');
 
 router.get('/compartilhamento', CompartilhamentoController.listarCompartilhamento); 
 router.post('/compartilhamento', CompartilhamentoController.cadastrarCompartilhamento); 
-router.patch('/compartilhamento', CompartilhamentoController.editarCompartilhamento); 
+router.patch('/compartilhamento/:comp_id', CompartilhamentoController.editarCompartilhamento); 
 router.delete('/compartilhamento', CompartilhamentoController.apagarCompartilhamento); 
 
 

@@ -67,10 +67,40 @@ module.exports = {
     }, 
     async editarCompartilhamento(request, response) {
         try {
+             
+            const { not_id, comp_plataforma, comp_data } = request.body;
+            const { comp_id } = request.params;
+
+            const sql = `
+            UPDATE COMPARTILHAMENTO
+            SET not_id = ?, comp_plataforma = ?, comp_data = ?
+            WHERE comp_id = ?;
+            `;
+
+            const values = [not_id, comp_plataforma, comp_data, comp_id];
+            const [result] = await db.query(sql, values);
+
+
+
+            if (result.affectedRows === 0) {
+                return response.status(404).json({
+                    sucesso: false, 
+                    mensagem: 'Compartilhamento não encontrado.', 
+                    dados: null
+                });
+            }
+
+            const dados = {
+                comp_id,
+                not_id,
+                comp_plataforma,
+                comp_data
+            };
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Alteração no Compartilhamento', 
-                dados: null
+                mensagem: 'Edição de Compartilhamento',
+                dados: dados 
             });
         } catch (error) {
             return response.status(500).json({
