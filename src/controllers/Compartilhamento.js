@@ -112,9 +112,27 @@ module.exports = {
     }, 
     async apagarCompartilhamento(request, response) {
         try {
+
+            const { comp_id } = request.params;
+            const sql = `
+            DELETE FROM COMPARTILHAMENTO
+            WHERE comp_id = ?;
+            `;
+            const values = [comp_id];
+            const [result] = await db.query(sql, values);
+
+            if (result.affectedRows === 0) {
+                return response.status(404).json({
+                    sucesso: false, 
+                    mensagem: 'Compartilhamento não encontrado.', 
+                    dados: null
+                });
+            }
+
+
             return response.status(200).json({
                 sucesso: true, 
-                mensagem: 'Exclusão de Compartilhamento', 
+                mensagem: 'Compartilhamento apagado com sucesso.', 
                 dados: null
             });
         } catch (error) {
